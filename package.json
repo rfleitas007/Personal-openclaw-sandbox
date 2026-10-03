@@ -1,0 +1,16 @@
+{
+  "name": "paii-decision-brief-generator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sandbox prototype: turns a structured problem statement into an evidence-disciplined executive decision brief.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "sample": "node scripts/build-sample.js"
+  },
+  "license": "UNLICENSED"
+}

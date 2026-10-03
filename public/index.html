@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PAII Decision Brief Generator</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div>
+        <h1>PAII Decision Brief Generator</h1>
+        <p class="sub">Structured problem in, evidence-disciplined decision brief out.</p>
+      </div>
+      <p class="sandbox">Sandbox prototype · Rule-based · Runs entirely in your browser. Nothing is sent anywhere.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel input-panel" aria-labelledby="input-heading">
+      <div class="panel-head">
+        <h2 id="input-heading">Problem statement</h2>
+        <div class="actions">
+          <button type="button" id="load-sample" class="btn ghost">Load sample</button>
+          <button type="button" id="clear" class="btn ghost">Clear</button>
+        </div>
+      </div>
+
+      <form id="brief-form" novalidate>
+        <div class="field">
+          <label for="decision">Decision / question <span class="req">required</span></label>
+          <textarea id="decision" name="decision" rows="2" maxlength="500" required
+            placeholder="e.g. Should we renew, replace, or extend the platform contract before the notice deadline?"></textarea>
+          <p class="error" id="decision-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="context">Context</label>
+          <textarea id="context" name="context" rows="3" maxlength="5000"
+            placeholder="Background, stakeholders, why now. Hedged statements (&quot;likely&quot;, &quot;we expect&quot;) are treated as assumptions."></textarea>
+          <p class="error" id="context-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="facts">Known facts</label>
+          <textarea id="facts" name="facts" rows="5" maxlength="5000"
+            placeholder="One per line. Cite evidence as [E1]. Hedged items are moved to Assumptions."></textarea>
+          <p class="hint">Only verified facts. Anything you expect or believe belongs in Context.</p>
+          <p class="error" id="facts-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="constraints">Constraints</label>
+          <textarea id="constraints" name="constraints" rows="3" maxlength="3000"
+            placeholder="One per line: budget, legal, policy, timing, capacity."></textarea>
+          <p class="error" id="constraints-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="options">Options under consideration</label>
+          <textarea id="options" name="options" rows="7" maxlength="5000"
+            placeholder="Name: description&#10;Pro: a benefit&#10;Con: a drawback&#10;Next option: description&#10;..."></textarea>
+          <p class="hint">One option per line as <code>Name: description</code>, followed by <code>Pro:</code> and <code>Con:</code> lines.</p>
+          <p class="error" id="options-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="evidence">Evidence / source notes</label>
+          <textarea id="evidence" name="evidence" rows="3" maxlength="5000"
+            placeholder="E1: Vendor quote dated 2026-09-12&#10;E2: Internal logs, Q2–Q3"></textarea>
+          <p class="error" id="evidence-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="deadline">Deadline / decision horizon</label>
+          <input id="deadline" name="deadline" type="text" maxlength="200"
+            placeholder="YYYY-MM-DD plus a short note, e.g. 2027-01-30 (notice deadline)">
+          <p class="error" id="deadline-error" role="alert"></p>
+        </div>
+
+        <button type="submit" class="btn primary">Generate brief</button>
+      </form>
+    </section>
+
+    <section class="panel output-panel" aria-labelledby="output-heading" aria-live="polite">
+      <div class="panel-head">
+        <h2 id="output-heading">Decision brief</h2>
+        <div class="actions">
+          <button type="button" id="copy" class="btn" disabled>Copy Markdown</button>
+          <button type="button" id="download" class="btn" disabled>Export .md</button>
+        </div>
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <div id="brief" class="brief">
+        <div class="empty">
+          <p>Fill in the problem statement and select <strong>Generate brief</strong>, or <strong>Load sample</strong> to see an example.</p>
+          <p>The brief keeps four things separate: what was <em>supplied as fact</em>, what is <em>assumed</em>, what the tool <em>inferred</em>, and what is <em>missing</em>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
